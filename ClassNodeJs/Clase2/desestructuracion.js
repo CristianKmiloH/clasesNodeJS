@@ -18,3 +18,9 @@ let persona = {
 const{nombre, apellido, edad} = persona
 
 console.log(nombre, edad, apellido)
+
+
+const family = ["padres", "hijos", "nietos"]
+
+const [,,fam3] = family
+console.log(fam3)
