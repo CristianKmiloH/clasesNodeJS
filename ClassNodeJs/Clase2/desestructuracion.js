@@ -8,8 +8,13 @@ let persona = {
 //     console.log(persona.nombre, persona.apellido)
 // }
 
-function printNameAge({nombre, edad}){
-    console.log(persona)
-    console.log(nombre, edad)
-}
-printNameAge(persona)
+// function printNameAge({nombre, edad}){
+//     console.log(persona)
+//     console.log(nombre, edad)
+// }
+
+//printNameAge(persona)
+
+const{nombre, apellido, edad} = persona
+
+console.log(nombre, edad, apellido)
