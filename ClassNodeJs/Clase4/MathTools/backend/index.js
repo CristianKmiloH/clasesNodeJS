@@ -1,5 +1,5 @@
 const http = require("http")
-const {calcularCilindro, calcularEsfera, calcularCubo} = require("./helpers/areas")
+const {calcularCilindro, calcularEsfera} = require("./helpers/areas")
 const colors = require("colors")
 
 console.log("Hola  tu!".cyan)
@@ -9,6 +9,8 @@ const ip = "localhost" // ejecutar-cms -> ipconfig
 
 http.createServer((solicitud, respuesta)=>{
     const nuevaUrl = new URL(solicitud.url, `http://${solicitud.headers.host}`)
+    respuesta.writeHead(200, {'Content-Type': 'application/json','Access-Control-Allow-Origin': "*"})
+
     console.log(nuevaUrl.toString().blue)
     console.log("Me llegó un request de la siguiente URL: ".rainbow + solicitud.url)
    
@@ -16,7 +18,14 @@ http.createServer((solicitud, respuesta)=>{
         case '/cilindro':
             const r = (nuevaUrl.searchParams.get('r'))
             const h = (nuevaUrl.searchParams.get('h'))
-            respuesta.write(`El area del cilindro es: ${calcularCilindro(r,h)}`)
+            let area = calcularCilindro(r,h)
+            respuesta.write(`${calcularCilindro(r,h)}`)
+            //respuesta.write(`El area del cilindro es: ${calcularCilindro(r,h)}`)
+            if(area) {
+                respuesta.write(JSON.stringify({area}))
+            } else {
+                respuesta.write("error")
+            }
             break;
         case '/esfera':
             const re = (nuevaUrl.searchParams.get('re'))
